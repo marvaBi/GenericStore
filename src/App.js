@@ -12,6 +12,8 @@ import { ThemeContextProvider, useThemeMode } from './contexts/ThemeContext';
 import { CartContextProvider } from './contexts/CartContext';
 import { WishListContextProvider } from './contexts/WishListContext';
 
+import { useProducts } from './hooks/useProducts';
+
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -74,17 +76,7 @@ function MainAppContent({ data }) {
 }
 
 export default function App() {
-    const [data, setData] = React.useState(null);
-    const [loading, setLoading] = React.useState(true);
-
-    React.useEffect(() => {
-        fetch('/data.json')
-            .then(res => res.json())
-            .then(json => {
-                setData(json);
-                setLoading(false);
-            });
-    }, []);
+    const { data, loading, error } = useProducts();
 
     if (loading) {
         return (
@@ -95,6 +87,19 @@ export default function App() {
                 height: '100vh'
             }}>
                 <CircularProgress />
+            </Box>
+        )
+    }
+
+    if (error) {
+        return (
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh'
+            }}>
+                <div>Error: Please refresh the page</div>
             </Box>
         )
     }
