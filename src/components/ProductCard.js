@@ -1,4 +1,8 @@
 import React from 'react';
+
+import { useCart } from '../contexts/CartContext';
+import { useWishList } from '../contexts/WishListContext';
+
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
@@ -10,13 +14,15 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Alert from '@mui/material/Alert';
 
 
 import QuantityInput from './QuantityInput';
 
 
-export default function ProductCard({ data, setWishList, setShoppingCart }) {
+export default function ProductCard({ data }) {
+    const { setCart } = useCart();
+    const { setWishList } = useWishList();
+
     const [count, setCount] = React.useState(1);
 
     const handleWish = () => {
@@ -30,7 +36,7 @@ export default function ProductCard({ data, setWishList, setShoppingCart }) {
     }
 
     const handleShop = () => {
-        setShoppingCart(prev => {
+        setCart(prev => {
             const index = prev.findIndex(([id]) => id === data.id);
             if (index > -1) {
                 return prev.map(([id, prevCount]) =>

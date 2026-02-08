@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
@@ -58,7 +59,7 @@ function Sort({ orderBy, setOrderBy }) {
     )
 }
 
-export default function Store({ data, setWishList, setShoppingCart }) {
+export default function Store({ data }) {
     const [orderBy, setOrderBy] = React.useState(SORTING_OPTIONS.DEFAULT);
     const [filterBy, setFilterBy] = React.useState('');
 
@@ -103,9 +104,7 @@ export default function Store({ data, setWishList, setShoppingCart }) {
                 {items.map((item) => (
                     <Grid key={item.id} size={{ xs: 1, sm: 1, md: 1 }}>
                         <ProductCard
-                            data={item}
-                            setWishList={setWishList}
-                            setShoppingCart={setShoppingCart}>
+                            data={item}>
                         </ProductCard>
                     </Grid>
                 ))}

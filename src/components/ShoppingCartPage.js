@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useCart } from '../contexts/CartContext';
+
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
@@ -157,19 +160,19 @@ function createData(id, img, name, price, count) {
     return { id, img, name, price: price, count, total: price * count };
 }
 
-export default function ShoppingCartPage({ data, shoppingCart, setShoppingCart, setMainPage }) {
-
+export default function ShoppingCartPage({ data, setMainPage }) {
+    const { cart, setCart } = useCart();
     const [isDialogOpen, setIsDialogOpen] = React.useState(false);
     const [itemToDelete, setItemToDelete] = React.useState(null);
 
     const rows =
-        shoppingCart.map(([id, count]) => {
+        cart.map(([id, count]) => {
             let details = data.products.find(item => item.id == id);
             return createData(id, details.img, details.name, details.price, count);
         });
 
     const handleQuantityChange = (id, newCount) => {
-        setShoppingCart(prev =>
+        setCart(prev =>
             prev.map(([itemId, count]) =>
                 itemId == id ? [itemId, newCount] : [itemId, count]
             )
@@ -186,7 +189,7 @@ export default function ShoppingCartPage({ data, shoppingCart, setShoppingCart, 
     };
     const confirmDelete = () => {
         if (itemToDelete !== null) {
-            setShoppingCart(prev =>
+            setCart(prev =>
                 prev.filter(([id, count]) => id != itemToDelete));
         }
         closeDialog();

@@ -9,6 +9,8 @@ import ShoppingCartPage from './components/ShoppingCartPage';
 import ChatModal from './components/ChatModal';
 
 import { ThemeContextProvider, useThemeMode } from './contexts/ThemeContext';
+import { CartContextProvider } from './contexts/CartContext';
+import { WishListContextProvider } from './contexts/WishListContext';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
@@ -21,10 +23,8 @@ const PAGES = {
     SHOPPING_CART: "ShoppingCart"
 }
 
-function MainAppContent({data}) {
+function MainAppContent({ data }) {
     const [mainPage, setMainPage] = React.useState("Store");
-    const [wishList, setWishList] = React.useState([]);
-    const [shoppingCart, setShoppingCart] = React.useState([]);
 
     const { mode } = useThemeMode();
     const theme = React.useMemo(() =>
@@ -35,23 +35,14 @@ function MainAppContent({data}) {
     let page;
     switch (mainPage) {
         case PAGES.STORE:
-            page = <Store
-                data={data}
-                setWishList={setWishList}
-                setShoppingCart={setShoppingCart} />;
+            page = <Store data={data} />;
             break;
         case PAGES.WISH_LIST:
-            page = <WishListPage
-                data={data}
-                wishList={wishList}
-                setWishList={setWishList}
-                setShoppingCart={setShoppingCart} />;
+            page = <WishListPage data={data} />;
             break;
         case PAGES.SHOPPING_CART:
             page = <ShoppingCartPage
                 data={data}
-                shoppingCart={shoppingCart}
-                setShoppingCart={setShoppingCart}
                 setMainPage={setMainPage} />;
             break;
 
@@ -70,11 +61,7 @@ function MainAppContent({data}) {
                         flexDirection: 'column',
                         minHeight: '100vh',
                     }}>
-                    <Header
-                        setMainPage={setMainPage}
-                        wishListLength={wishList.length}
-                        shoppingCartLength={shoppingCart.length}
-                    />
+                    <Header setMainPage={setMainPage} />
                     <Box component="main" sx={{ flexGrow: 1 }}>
                         {page}
                     </Box>
@@ -95,7 +82,7 @@ export default function App() {
             .then(res => res.json())
             .then(json => {
                 setData(json);
-                setLoading(false); 
+                setLoading(false);
             });
     }, []);
 
@@ -114,7 +101,11 @@ export default function App() {
 
     return (
         <ThemeContextProvider>
-            <MainAppContent data={data}/>
+            <CartContextProvider>
+                <WishListContextProvider>
+                    <MainAppContent data={data} />
+                </WishListContextProvider>
+            </CartContextProvider>
         </ThemeContextProvider>
     );
 }

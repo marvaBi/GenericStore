@@ -1,3 +1,7 @@
+import { useCart } from '../contexts/CartContext';
+import { useWishList } from '../contexts/WishListContext';
+
+
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -10,14 +14,16 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 
-export default function WishCard({ data, setWishList, setShoppingCart }) {
+export default function WishCard({ data }) {
+    const { setCart } = useCart();
+    const { setWishList } = useWishList();
 
     const handleRemove = () => {
         setWishList(prev => prev.filter(itemId => itemId !== data.id));
     }
 
     const handleAddToCart = () => {
-        setShoppingCart(prev => {
+        setCart(prev => {
             const index = prev.findIndex(([id]) => id === data.id);
             if (index > -1) {
                 return prev.map(([id, prevCount]) =>

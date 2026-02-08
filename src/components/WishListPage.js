@@ -1,11 +1,15 @@
 import React from 'react';
+
+import { useWishList } from '../contexts/WishListContext';
+
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import WishCard from './WishCard';
 
-export default function WishListPage({ data, wishList, setWishList, setShoppingCart }) {
+export default function WishListPage({ data }) {
+    const { wishList } = useWishList();
 
     let items = data.products.filter(item => wishList.includes(item.id));
 
@@ -19,7 +23,7 @@ export default function WishListPage({ data, wishList, setWishList, setShoppingC
                 items.length ?
                     items.map((item) => (
                         <Box key={"wish" + item.id} sx={{ mx: 'auto' }}>
-                            <WishCard data={item} setWishList={setWishList} setShoppingCart={setShoppingCart} />
+                            <WishCard data={item} />
                         </Box>
                     )) :
                     <Typography variant="h6" component="div">

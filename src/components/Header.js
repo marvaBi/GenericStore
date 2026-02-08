@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { useCart } from '../contexts/CartContext';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,8 +17,10 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { useThemeMode } from '../contexts/ThemeContext';
 
 
-export default function Header({ setMainPage, wishListLength, shoppingCartLength }) {
+export default function Header({ setMainPage, wishListLength }) {
     const { mode, toggleMode } = useThemeMode();
+    const { cart } = useCart();
+
 
     const handleWishClick = () => { setMainPage("WishList") }
     const handleCartClick = () => { setMainPage("ShoppingCart") }
@@ -53,7 +58,7 @@ export default function Header({ setMainPage, wishListLength, shoppingCartLength
                             aria-label="show 17 new notifications"
                             color="inherit"
                             onClick={handleCartClick}>
-                            <Badge badgeContent={shoppingCartLength} color="secondary"
+                            <Badge badgeContent={cart.length} color="secondary"
                                 anchorOrigin={{
                                     vertical: 'bottom',
                                     horizontal: 'right',
