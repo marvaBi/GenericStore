@@ -28,7 +28,14 @@ function wishListReducer(state, action) {
 }
 
 export function WishListContextProvider({ children }) {
-    const [wishList, dispatch] = React.useReducer(wishListReducer, []);
+    const [wishList, dispatch] = React.useReducer(wishListReducer, [], ()=>{
+        const storedWishList = localStorage.getItem('wishList');
+        return storedWishList ? JSON.parse(storedWishList) : [];
+    });
+
+    React.useEffect(() => {
+        localStorage.setItem('wishList', JSON.stringify(wishList));
+    }, [wishList]);
 
     const addToWishList = (id) => dispatch({ type: ACTIONS.ADD, payload: { id } });
     const removeFromWishList = (id) => dispatch({ type: ACTIONS.REMOVE, payload: { id } });

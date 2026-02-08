@@ -40,7 +40,14 @@ function cartReducer(state, action) {
 }
 
 export function CartContextProvider({ children }) {
-    const [cart, dispatch] = React.useReducer(cartReducer, []);
+    const [cart, dispatch] = React.useReducer(cartReducer, [], () => {
+        const storedCart = localStorage.getItem('cart');
+        return storedCart ? JSON.parse(storedCart) : [];
+    });
+
+    React.useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
 
     const addToCart = (id, count) => dispatch({ type: ACTIONS.ADD, payload: { id, count } });
     const removeFromCart = (id) => dispatch({ type: ACTIONS.REMOVE, payload: { id } });
