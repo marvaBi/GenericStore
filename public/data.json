@@ -1,0 +1,84 @@
+{
+    "products": [
+        {
+            "id":"product_1",
+            "name": "product 1",
+            "price": 100,
+            "description": "description",
+            "img": "assets/bouquet1.jpg",
+            "entryDate":"2025-09-10"
+        },
+        {
+            "id":"product_2",
+            "name": "product 2",
+            "price": 150,
+            "description": "description",
+            "img": "assets/bouquet2.jpg",
+            "entryDate":"2025-09-15"
+        },
+        {
+            "id":"product_3",
+            "name": "product 3",
+            "price": 200,
+            "description": "description",
+            "img": "assets/bouquet3.jpg",
+            "entryDate":"2025-08-03"
+        },
+        {
+            "id":"product_4",
+            "name": "product 4",
+            "price": 180,
+            "description": "description",
+            "img": "assets/bouquet4.jpg",
+            "entryDate":"2025-01-28"
+        },
+        {
+            "id":"product_5",
+            "name": "product 5",
+            "price": 100,
+            "description": "description",
+            "img": "assets/bouquet5.jpg",
+            "entryDate":"2025-07-20"
+        },
+        {
+            "id":"product_6",
+            "name": "product 6",
+            "price": 175,
+            "description": "description",
+            "img": "assets/bouquet6.jpg",
+            "entryDate":"2025-09-05"
+        },
+        {
+            "id":"product_7",
+            "name": "product 7",
+            "price": 200,
+            "description": "description",
+            "img": "assets/bouquet7.jpg",
+            "entryDate":"2025-03-15"
+        },
+        {
+            "id":"product_8",
+            "name": "product 8",
+            "price": 120,
+            "description": "description",
+            "img": "assets/bouquet8.jpg",
+            "entryDate":"2025-04-12"
+        },
+        {
+            "id":"product_9",
+            "name": "product 9",
+            "price": 150,
+            "description": "description",
+            "img": "assets/bouquet9.jpg",
+            "entryDate":"2025-09-01"
+        },
+        {
+            "id":"product_10",
+            "name": "product 10",
+            "price": 100,
+            "description": "description",
+            "img": "assets/bouquet10.jpg",
+            "entryDate":"2025-08-18"
+        }
+    ]
+}
