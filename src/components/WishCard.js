@@ -15,24 +15,15 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 
 export default function WishCard({ data }) {
-    const { setCart } = useCart();
-    const { setWishList } = useWishList();
+    const { addToCart } = useCart();
+    const { removeFromWishList } = useWishList();
 
     const handleRemove = () => {
-        setWishList(prev => prev.filter(itemId => itemId !== data.id));
+        removeFromWishList(data.id);
     }
 
     const handleAddToCart = () => {
-        setCart(prev => {
-            const index = prev.findIndex(([id]) => id === data.id);
-            if (index > -1) {
-                return prev.map(([id, prevCount]) =>
-                    id == data.id ? [id, prevCount + 1] : [id, prevCount]
-                );
-            } else {
-                return [...prev, [data.id, 1]];
-            }
-        });
+        addToCart(data.id, 1);
     }
 
     return (

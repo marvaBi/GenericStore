@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useCart } from '../contexts/CartContext';
+import { useWishList } from '../contexts/WishListContext';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,10 +18,10 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import { useThemeMode } from '../contexts/ThemeContext';
 
 
-export default function Header({ setMainPage, wishListLength }) {
+export default function Header({ setMainPage }) {
     const { mode, toggleMode } = useThemeMode();
     const { cart } = useCart();
-
+    const { wishList } = useWishList();
 
     const handleWishClick = () => { setMainPage("WishList") }
     const handleCartClick = () => { setMainPage("ShoppingCart") }
@@ -45,7 +46,7 @@ export default function Header({ setMainPage, wishListLength }) {
                             aria-label="show 4 new mails"
                             color="inherit"
                             onClick={handleWishClick}>
-                            <Badge badgeContent={wishListLength} color="secondary"
+                            <Badge badgeContent={wishList.length} color="secondary"
                                 anchorOrigin={{
                                     vertical: 'bottom',
                                     horizontal: 'right',

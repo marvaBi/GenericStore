@@ -20,32 +20,18 @@ import QuantityInput from './QuantityInput';
 
 
 export default function ProductCard({ data }) {
-    const { setCart } = useCart();
-    const { setWishList } = useWishList();
+    const { addToCart } = useCart();
+    const { addToWishList } = useWishList();
 
     const [count, setCount] = React.useState(1);
 
     const handleWish = () => {
-        setWishList(prev => {
-            if (prev.includes(data.id)) {
-                return prev;
-            } else {
-                return [...prev, data.id];
-            }
-        });
+        addToWishList(data.id);
     }
 
     const handleShop = () => {
-        setCart(prev => {
-            const index = prev.findIndex(([id]) => id === data.id);
-            if (index > -1) {
-                return prev.map(([id, prevCount]) =>
-                    id == data.id ? [id, prevCount + count] : [id, prevCount]
-                );
-            } else {
-                return [...prev, [data.id, count]];
-            }
-        });
+        addToCart(data.id, count);
+        setCount(1);
     };
 
 

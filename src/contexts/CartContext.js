@@ -2,10 +2,58 @@ import React from 'react';
 
 const CartContext = React.createContext();
 
-export function CartContextProvider({ children }) {
-    const [cart, setCart] = React.useState([]);
+const ACTIONS = {
+    ADD: 'ADD',
+    REMOVE: 'REMOVE',
+    SET_QTY: 'SET_QTY',
+    CLEAR: 'CLEAR'
+};
 
-    const value = React.useMemo(() => ({ cart, setCart }), [cart]);
+function cartReducer(state, action) {
+    const { id, count } = action.payload;
+    switch (action.type) {
+        case ACTIONS.ADD: {
+            const index = state.findIndex(([itemId]) => itemId === id);
+            if (index > -1) {
+                return state.map(([itemId, prevCount]) =>
+                    itemId == id ? [itemId, prevCount + count] : [itemId, prevCount]
+                );
+            } else {
+                return [...state, [id, count]];
+            }
+        }
+
+        case ACTIONS.REMOVE:
+            return state.filter(([itemId]) => itemId != id);
+
+        case ACTIONS.SET_QTY:
+            return state.map(([itemId, prevCount]) =>
+                itemId == id ? [itemId, count] : [itemId, prevCount]
+            )
+
+        case ACTIONS.CLEAR:
+            return [];
+
+        default:
+            return state;
+    }
+}
+
+export function CartContextProvider({ children }) {
+    const [cart, dispatch] = React.useReducer(cartReducer, []);
+
+    const addToCart = (id, count) => dispatch({ type: ACTIONS.ADD, payload: { id, count } });
+    const removeFromCart = (id) => dispatch({ type: ACTIONS.REMOVE, payload: { id } });
+    const setCartItemQty = (id, count) => dispatch({ type: ACTIONS.SET_QTY, payload: { id, count } });
+    const clearCart = () => dispatch({ type: ACTIONS.CLEAR });
+
+    const value = React.useMemo(() => ({
+        cart,
+        addToCart,
+        removeFromCart,
+        setCartItemQty,
+        clearCart
+    }), [cart]);
 
     return (
         <CartContext.Provider value={value}>{children}</CartContext.Provider>

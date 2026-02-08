@@ -161,7 +161,7 @@ function createData(id, img, name, price, count) {
 }
 
 export default function ShoppingCartPage({ data, setMainPage }) {
-    const { cart, setCart } = useCart();
+    const { cart, removeFromCart, setCartItemQty } = useCart();
     const [isDialogOpen, setIsDialogOpen] = React.useState(false);
     const [itemToDelete, setItemToDelete] = React.useState(null);
 
@@ -172,11 +172,7 @@ export default function ShoppingCartPage({ data, setMainPage }) {
         });
 
     const handleQuantityChange = (id, newCount) => {
-        setCart(prev =>
-            prev.map(([itemId, count]) =>
-                itemId == id ? [itemId, newCount] : [itemId, count]
-            )
-        );
+        setCartItemQty(id, newCount);
     };
 
     const openDialog = (id) => {
@@ -189,8 +185,7 @@ export default function ShoppingCartPage({ data, setMainPage }) {
     };
     const confirmDelete = () => {
         if (itemToDelete !== null) {
-            setCart(prev =>
-                prev.filter(([id, count]) => id != itemToDelete));
+            removeFromCart(itemToDelete);
         }
         closeDialog();
     };
