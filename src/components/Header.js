@@ -74,7 +74,7 @@ export default function Header({ setMainPage }) {
                             color="inherit"
                             onClick={toggleMode}
                         >
-                            {mode == 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+                            {mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
                         </IconButton>
                         <IconButton
                             size="large"

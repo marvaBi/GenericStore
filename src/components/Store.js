@@ -63,8 +63,8 @@ export default function Store({ data }) {
     const [orderBy, setOrderBy] = React.useState(SORTING_OPTIONS.DEFAULT);
     const [filterBy, setFilterBy] = React.useState('');
 
-    let items = data.products;
-    if (orderBy != SORTING_OPTIONS.DEFAULT) {
+    let items;
+    if (orderBy !== SORTING_OPTIONS.DEFAULT) {
         switch (orderBy) {
             case SORTING_OPTIONS.NEW_FIRST:
                 items = [...data.products].sort((a, b) => {
@@ -79,12 +79,16 @@ export default function Store({ data }) {
             case SORTING_OPTIONS.EXPENSIVE_FIRST:
                 items = [...data.products].sort((a, b) => b.price - a.price);
                 break;
+
+            default:
+                items = data.products;
+                break;
         }
     }
 
 
     items = [...items].filter(item =>
-        item.name.toLowerCase().indexOf(filterBy.toLowerCase()) != -1
+        item.name.toLowerCase().indexOf(filterBy.toLowerCase()) !== -1
     )
 
     return (

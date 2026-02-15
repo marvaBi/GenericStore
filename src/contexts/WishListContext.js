@@ -19,7 +19,7 @@ function wishListReducer(state, action) {
             }
         }
         case ACTIONS.REMOVE:
-            return state.filter(itemId => itemId != id);
+            return state.filter(itemId => itemId !== id);
         case ACTIONS.CLEAR:
             return [];
         default:

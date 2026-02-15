@@ -16,7 +16,7 @@ function cartReducer(state, action) {
             const index = state.findIndex(([itemId]) => itemId === id);
             if (index > -1) {
                 return state.map(([itemId, prevCount]) =>
-                    itemId == id ? [itemId, prevCount + count] : [itemId, prevCount]
+                    itemId === id ? [itemId, prevCount + count] : [itemId, prevCount]
                 );
             } else {
                 return [...state, [id, count]];
@@ -24,11 +24,11 @@ function cartReducer(state, action) {
         }
 
         case ACTIONS.REMOVE:
-            return state.filter(([itemId]) => itemId != id);
+            return state.filter(([itemId]) => itemId !== id);
 
         case ACTIONS.SET_QTY:
             return state.map(([itemId, prevCount]) =>
-                itemId == id ? [itemId, count] : [itemId, prevCount]
+                itemId === id ? [itemId, count] : [itemId, prevCount]
             )
 
         case ACTIONS.CLEAR:

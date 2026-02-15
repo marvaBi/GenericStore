@@ -167,7 +167,7 @@ export default function ShoppingCartPage({ data, setMainPage }) {
 
     const rows =
         cart.map(([id, count]) => {
-            let details = data.products.find(item => item.id == id);
+            let details = data.products.find(item => item.id === id);
             return createData(id, details.img, details.name, details.price, count);
         });
 
