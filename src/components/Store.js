@@ -91,27 +91,27 @@ export default function Store({ data }) {
     )
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', p: 3, gap: 5 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', p: { xs: 2, md: 3 }, gap: 5 }}>
             <Stack
-                direction="row"
+                direction={{ xs: "column", sm: "row" }}
+                spacing={2}
                 sx={{
                     justifyContent: "space-between",
-                    alignItems: "center",
+                    alignItems: { xs: "stretch", sm: "center" },
                 }}
             >
                 <Search filterBy={filterBy} setFilterBy={setFilterBy} />
                 <Sort orderBy={orderBy} setOrderBy={setOrderBy} />
             </Stack>
 
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 3, md: 3 }}>
+            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 8, md: 12 }}>
                 {items.map((item) => (
-                    <Grid key={item.id} size={{ xs: 1, sm: 1, md: 1 }}>
-                        <ProductCard
-                            data={item}>
-                        </ProductCard>
+                    <Grid key={item.id} size={{ xs: 1, sm: 4, md: 4 }}>
+                        <ProductCard data={item} />
                     </Grid>
                 ))}
             </Grid>
+
         </Box>
     );
 }
