@@ -2,6 +2,10 @@
 
 A modern, responsive e-commerce storefront built with **React** and **Material-UI**. This project demonstrates core frontend development concepts, including state management, API integration, and component-based architecture.
 
+**[🔗 Live Demo](https://generic-store-three.vercel.app/)**
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/02e3d973-aef9-48a7-82da-0d201cf049b0" />
+
 ## ✨ Features
 * **Product Catalog:** Dynamically fetched products with high-quality display and filtering.
 * **Wishlist System:** Users can save their favorite items to a personal wishlist for future purchase.
