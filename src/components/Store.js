@@ -63,7 +63,7 @@ export default function Store({ data }) {
     const [orderBy, setOrderBy] = React.useState(SORTING_OPTIONS.DEFAULT);
     const [filterBy, setFilterBy] = React.useState('');
 
-    let items;
+    let items = data.products;
     if (orderBy !== SORTING_OPTIONS.DEFAULT) {
         switch (orderBy) {
             case SORTING_OPTIONS.NEW_FIRST:
@@ -81,7 +81,6 @@ export default function Store({ data }) {
                 break;
 
             default:
-                items = data.products;
                 break;
         }
     }
